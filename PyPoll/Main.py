@@ -1,8 +1,8 @@
 import csv
 from pathlib import Path
 
-input_data = Path("election_data.csv")
-output_data = Path("PyPolData.txt")
+input_data = Path("resources/election_data.csv")
+output_data = Path("analysis/PyPolData.txt")
 
 # Set up variables to store data
 voter_totals = 0
@@ -10,7 +10,7 @@ candidateslist = []
 votes_per_candidate_totals = {}
 
 # Read in CSV file and iterate through rows
-with open("election_data.csv") as csvfile:
+with open(input_data) as csvfile:
     csvreader = csv.reader(csvfile)
     header = next(csvreader)
     for row in csvreader:
@@ -41,7 +41,7 @@ print(f"Winner: {winner}")
 print("-------------------------")
 
 # Export results to text file
-with open("election_results.txt", "w") as txtfile:
+with open(output_data, "w") as txtfile:
     txtfile.write("Election Results\n")
     txtfile.write("-------------------------\n")
     txtfile.write(f"Total Votes: {voter_totals}\n")

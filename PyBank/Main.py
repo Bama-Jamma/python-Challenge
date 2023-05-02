@@ -3,8 +3,8 @@ import csv
 from pathlib import Path
 
 # Files to Input/Output
-input_file = Path("budget_data.csv")
-output_file = Path("result_PyBank.txt")
+input_file = Path("resources/budget_data.csv")
+output_file = Path("analysis/result_PyBank.txt")
 
 # Reading the file
 with open(input_file, newline="") as csvfile:
@@ -41,6 +41,8 @@ with open(input_file, newline="") as csvfile:
                 greatest_decrease["amount"] = change
 
         prev_revenue = revenue
+
+
 
     # Average Revenue Change
     avg_revenue = sum(budget_chart) / len(budget_chart)
