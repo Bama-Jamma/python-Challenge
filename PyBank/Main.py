@@ -8,26 +8,26 @@ output_file = Path("analysis/result_PyBank.txt")
 
 # Reading the file
 with open(input_file, newline="") as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
-    header = next(csvreader)
+    BankData = csv.reader(csvfile, delimiter=",")
+    header = next(BankData)
 
     # Initializing the variables
-    count_row = 0
+    count_all_rows = 0
     total_revenue = 0
     greatest_increase = {"date": "", "amount": float("-inf")}
     greatest_decrease = {"date": "", "amount": float("inf")}
-    prev_revenue = None
+    previous_rev = None
     budget_chart = []
 
     # Iterating through CSV file
-    for row in csvreader:
+    for row in BankData:
         date = row[0]
         revenue = int(row[1])
-        count_row += 1
+        count_all_rows += 1 
         total_revenue += revenue
 
-        if prev_revenue is not None:
-            change = revenue - prev_revenue
+        if previous_rev is not None:
+            change = revenue - previous_rev
             budget_chart.append(change)
 
             # Finding the greatest increase in revenue
@@ -40,7 +40,7 @@ with open(input_file, newline="") as csvfile:
                 greatest_decrease["date"] = date
                 greatest_decrease["amount"] = change
 
-        prev_revenue = revenue
+        previous_rev = revenue
 
 
 
@@ -50,7 +50,7 @@ with open(input_file, newline="") as csvfile:
     # Print the output
     print("\nFinancial Analysis")
     print("----------------------------")
-    print(f"Total Months: {count_row}")
+    print(f"Total Months: {count_all_rows}")
     print(f"Total Revenue: ${total_revenue}")
     print(f"Average Revenue Change: ${avg_revenue:.2f}")
     print(f"Greatest Increase in Revenue: {greatest_increase['date']} (${greatest_increase['amount']})")
@@ -59,7 +59,7 @@ with open(input_file, newline="") as csvfile:
     # Create Report Summary
     report = f"""Financial Analysis
 ----------------------------
-Total Months: {count_row}
+Total Months: {count_all_rows}
 Total: ${total_revenue}
 Average Change: ${avg_revenue:.2f}
 Greatest Increase in Profits: {greatest_increase["date"]} (${greatest_increase["amount"]})
